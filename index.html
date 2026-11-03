@@ -9,6 +9,14 @@
 <meta name="theme-color" content="#F5F6F3">
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
 <script defer src="/_vercel/insights/script.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2P55D1KWLC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2P55D1KWLC', {send_page_view:false});
+</script>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
 <title>Тогоочийн туслах</title>
@@ -815,8 +823,9 @@ if(d.copy){var r2=R.filter(function(r){return r.id===d.copy})[0];var txt=shoppin
 document.getElementById("q").addEventListener("input",function(e){state.q=e.target.value;if(state.view==="recipe"){nav("recipes")}else{render()}});
 document.addEventListener("change",function(e){var k=e.target.dataset&&e.target.dataset.fset;if(k){state.f[k]=e.target.value;render();var n=document.getElementById("f-"+k);if(n)n.focus()}});
 document.getElementById("brandsub").textContent=R.length+" жор · "+Object.keys(COUNTRIES).length+" ангилал · "+Object.keys(ING).length+" орцын тайлбар";
-window.addEventListener("hashchange",route);
-route();
+function trackView(){if(!window.gtag)return;var r=state.view==="recipe"?R.filter(function(x){return x.id===state.recipe})[0]:null;var names={recipes:"Жорууд",cook:"Юу хийх вэ?",pantry:"Орц ба орлуулалт",saved:"Хадгалсан"};gtag("event","page_view",{page_location:location.href,page_path:"/"+(location.hash.slice(1)||"recipes"),page_title:r?r.n:(names[state.view]||"Тогоочийн туслах")})}
+window.addEventListener("hashchange",function(){route();trackView()});
+route();trackView();
 </script>
 </body>
 </html>
